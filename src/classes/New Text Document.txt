@@ -1,0 +1,22 @@
+(function() {
+    // force links to open in iframe
+    const links = document.querySelectorAll('a[target="_blank"]');
+    links.forEach(link => link.target = "_self");
+
+    // override window.open to stay inside iframe
+    const originalWindowOpen = window.open;
+    window.open = function(url, name, specs) {
+        if (url) {
+            window.location.href = url;
+        } else {
+            return originalWindowOpen.apply(this, arguments);
+        }
+    };
+
+    // dynamically handle new links
+    const observer = new MutationObserver(() => {
+        const links = document.querySelectorAll('a[target="_blank"]');
+        links.forEach(link => link.target = "_self");
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
