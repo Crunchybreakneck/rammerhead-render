@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const cachePath = path.join(__dirname, 'cache-js');
-if (!fs.existsSync(cachePath)) {
-    fs.mkdirSync(cachePath, { recursive: true });
+const cacheDir = path.join(__dirname, 'cache-js');
+if (!fs.existsSync(cacheDir)) {
+    fs.mkdirSync(cacheDir, { recursive: true });
 }
 
 const express = require('express');
